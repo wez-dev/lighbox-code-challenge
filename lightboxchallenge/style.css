@@ -12,7 +12,7 @@
  * Styles ------------------
  * -------------------------
  */
-@font-face{
+ @font-face{
     font-family: "Averta";
     src:url("fonts/Averta-Bold.ttf") format("truetype"),
     url("fonts/averta-boldaverta-bold.woff") format("woff"),
@@ -64,6 +64,10 @@ body {
 /* Remove link styles */
 a { 
     text-decoration:none !important;
+}
+/* Correct conflict with parent theme */
+.primary-navigation a:focus {
+	position: revert !important;
 }
 /* -------------------------
 * Mobile menu--------------
@@ -237,6 +241,7 @@ span.close {
     -webkit-transform: rotate(7deg);
     -moz-transform: rotate(-7deg);
     transform: rotate(7deg);
+	z-index: -999;
 }
 .hero-header p {
     line-height: 1.3;
