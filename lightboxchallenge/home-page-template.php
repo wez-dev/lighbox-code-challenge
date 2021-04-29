@@ -6,30 +6,8 @@
  */
 	get_header();
 
-	// format the headline, so that the last word is wrapped in a span // 
-    // Breaks string to pieces
-    $title = get_field('lbc_headline');
-    $pieces = explode(" ", $title);
-    // Modifies the last word
-    $pieces[count($pieces)-1] = '<span class="accent-color">' . $pieces[count($pieces)-1] . '</span>';
-    // Returns the glued pieces
-    $title = implode(" ", $pieces);
-?>
-<!-- hero -->
-	<div class="hero-header-position"><!-- 	Re-positions .hero-header to menu area -->
-		<div class="hero-header jumbotron text-white text-center rounded-0">
-			<div class="container col-lg-5"><!-- Bootstrap default format	 -->
-			  <h1 class="h2"><?php echo $title; ?></h1>
-			  <p class="my-5"><?php echo the_field("lbc_headline_paragraph"); ?></p>
-			  <p class="lead my-5">
-				<a class="btn btn-outline-light btn-lg rounded-0" href="<?php echo "Hero Link" ?> role="button"> <?php echo the_field("lbc_headline_button_text"); ?></a>
-			  </p>
-			</div><!-- 	/container -->
-		</div><!-- /.hero-header -->
-		<div class="diagonal-cut"></div>
 
-</div><!-- hero-header-position -->
-<!-- /hero -->
+?>
 
 <!-- icon cards  -->
 <div class="container col-11 col-sm-9 col-md-12 col-md-11">

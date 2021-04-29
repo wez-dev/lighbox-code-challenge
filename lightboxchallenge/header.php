@@ -11,6 +11,14 @@
  * @since LightBox Challenge 1.0
  */
 
+	// format the headline, so that the last word is wrapped in a span // 
+    // Breaks string to pieces
+    $title = get_field('lbc_headline');
+    $pieces = explode(" ", $title);
+    // Modifies the last word
+    $pieces[count($pieces)-1] = '<span class="accent-color">' . $pieces[count($pieces)-1] . '</span>';
+    // Returns the glued pieces
+    $title = implode(" ", $pieces);
 ?>
 <!doctype html>
 <html <?php language_attributes(); ?> <?php twentytwentyone_the_html_classes(); ?>>
@@ -23,29 +31,19 @@
 	<?php wp_head(); ?>
 </head>
 <style>
-	.header-overlay {
-  background-image: url("<?php echo the_field("lbc_header_image_small_screens"); ?>"), url("<?php echo the_field("lbc_header_overlay_image"); ?>"), linear-gradient(to top, rgba(51,51,102, .1), rgba(51,51,102, .95));
-  		background-blend-mode: multiply;	
-	   background-size: cover; 
-   	   object-fit:cover; 
-	   background-position: 50% 50%;
+.header-overlay::after {
+  background-image: url("<?php echo the_field("lbc_header_image_small_screens"); ?>"), url("<?php echo the_field("lbc_header_overlay_image"); ?>"), linear-gradient(to top, rgba(51,51,102, .1), rgba(51,51,102, .95));	
 }
 #site-navigation {
-   background: #2c89fb url("<?php echo the_field("lbc_header_overlay_image"); ?>") right no-repeat;
-   background-blend-mode: screen;	
-   background-size: cover; 
-   object-fit:cover; 
-   background-position: 50% 50%; 
-   background-blend-mode: overlay;	
+	background: #2c89fb url("<?php echo the_field("lbc_header_overlay_image") ?>");
+   	background-blend-mode: overlay;
+   	background-size: cover; 
+   	object-fit:cover; 
+   	background-position: 50% 50%; 	
 }	
 @media (min-width: 768px) {
-	.header-overlay {	
-		height: 115vh;
+	.header-overlay::after {	
   		background-image: url("<?php echo the_field("lbc_header_image_big_screens"); ?>"), url("<?php echo the_field("lbc_header_overlay_image"); ?>"), linear-gradient(to top, rgba(51,51,102, .1), rgba(51,51,102, .95));
-  		background-blend-mode: multiply;	
-	    background-size: cover; 
-   	    object-fit:cover; 	
-	    background-position: 50% 50%;
 	}	
 }
 </style>
@@ -62,7 +60,20 @@
 	<?php
 		if ($show_header){
 		?>
+		
+<!-- hero -->
+		<div class="hero-header jumbotron text-white text-center rounded-0">
+			<div class="container col-lg-5"><!-- Bootstrap default format	 -->
+			  <h1 class="h2"><?php echo $title; ?></h1>
+			  <p class="my-5"><?php echo the_field("lbc_headline_paragraph"); ?></p>
+			  <p class="lead my-5">
+				<a class="btn btn-outline-light btn-lg rounded-0" href="/#"><?php echo the_field("lbc_headline_button_text"); ?></a>
+			  </p>
+			</div><!-- 	/container -->
+		</div><!-- /.hero-header -->
+<!-- /hero -->		
 		</div><!-- /header-overlay	 -->
+
 		<!-- Nest navigation bar inside header overlay, so that it can be seen -->
 		<?php } ?>
 <body <?php body_class(); ?>>

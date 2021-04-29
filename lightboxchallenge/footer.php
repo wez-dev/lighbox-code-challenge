@@ -19,8 +19,7 @@
 </div><!-- #page -->
 <style>
 .footer-overlay {
-	background: #2c89fb url(http://wesm1.sg-host.com/wp-content/uploads/2021/04/cartographer.png) right no-repeat;
-	background-blend-mode: screen;	
+	background: #2c89fb url("<?php echo the_field("lbc_header_overlay_image") ?>") right no-repeat;
 	background-size: cover; 
 	object-fit:cover; 
 	background-position: 50% 50%; 
@@ -34,7 +33,6 @@
 				<div class="col-12 col-lg-3">
 					<img src="<?php echo the_field("lbc_footer_logo"); ?>" alt="Envria Logo">
 				</div>
-				<div class="footer-position-inner"></div>
 					<div class="col-12 col-lg-3 mt-lg-4">
 						<div class="footer-services">
 							<p class="mb-3"><?php echo the_field("lbc_column_one_heading"); ?></p>

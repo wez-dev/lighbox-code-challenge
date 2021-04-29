@@ -9,21 +9,32 @@
 */
 
 /* -------------------------
- * Styles ------------------
- * -------------------------
- */
- @font-face{
+* Styles ------------------
+* -------------------------
+*/
+@font-face{
     font-family: "Averta";
     src:url("fonts/Averta-Bold.ttf") format("truetype"),
     url("fonts/averta-boldaverta-bold.woff") format("woff"),
     url("fonts/Averta-Regular.ttf") format("woff"),
     url("fonts/averta-regularaverta-regular.woff") format("woff"),
 }
+body {
+    background: #fff;
+}
 h1, h2, h3, h4, h5, h6,
 p { 
     font-family: "Averta", sans-serif !important; 
 }
-body {
+/* Remove link styles */
+a { 
+    text-decoration:none !important;
+}
+.menu-wrapper a:hover {
+    color: #09d36c !important;
+}
+.callout-menu-btn a:hover {
+    color: black !important;
     background: #fff;
 }
 /* Accent colour for final word in header headline */
@@ -35,6 +46,9 @@ body {
 }
 .bigger-paragraph {
 	font-size: xx-large;
+}
+.hero-header p {
+    line-height: 1.3;
 }
 /* -------------------------
 * Site Identity------------
@@ -58,203 +72,39 @@ body {
     font-size: 75%;
 }
 /* -------------------------
-* NAVIGATION --------------
-* -------------------------
-*/
-/* Remove link styles */
-a { 
-    text-decoration:none !important;
-}
-/* Correct conflict with parent theme */
-.primary-navigation a:focus {
-	position: revert !important;
-}
-/* -------------------------
-* Mobile menu--------------
-* -------------------------
-*/
-/* Posiiton and prepare mobile navigation */
-#site-navigation {
-    height: 100vh;
-    position: absolute;
-    top: 0;
-}
-.primary-navigation-open .menu-button-container {
-    position: absolute;
-    background: transparent;
-}
-.primary-menu-container {
-    margin-top: 30px;/* move menu items below logo*/
-}
-.primary-navigation-open .primary-navigation>.primary-menu-container {
-    background: transparent;
-}
-/* Add logo to mobile menu */
-span.dropdown-icon.close::before {
-	content: "";
-	visibility: visible;
-	background: url('http://wesm1.sg-host.com/wp-content/uploads/2021/04/envira-footer-logo.png');
-    background-size: cover;
-	height: 100px;
-    width: 200px;
-    position: absolute;
-    left: 0;
-}
-/* mobile menu links */
-.primary-navigation-open .primary-menu-container li {
-    height: 40px;
-    padding: 0;
-}
-/* Seperate contact button from other menu items */
-.primary-menu-container ul li:nth-child(4) {
-    margin-top: 55px;
-    margin-left: -70px;
-}
-.primary-navigation-open .primary-menu-container a {
-    text-align: left;
-}
-.primary-navigation-open .primary-menu-container .callout-menu-btn a {
-    text-align: center;
-    outline: #fff solid 1px;
-    margin-bottom: 0;
-    width: 40%;
-    padding: .7rem 2rem!important;
-    font-weight: 300;
-    font-size: small;
-}
-.mobile-menu-btn {
-    background: green;
-	margin-left: 0 !important;
-	margin-top: 0 !important;
-	margin-bottom: 10px !important;
-}
-/* See media queries for menu visability control */
-/* Custom mobile hamburger */
-.dropdown-icon.open {
-    color: transparent !important;
-    background-image: url("http://wesm1.sg-host.com/wp-content/uploads/2021/04/flipped.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 30px;
-    height: 30px;
-    background-color: transparent;
-    border: none;
-    margin-right: 10px;
-}
-span.close {
-    visibility: hidden;
-}
-.close::after {
-    content: "";
-    display: block !important;
-    visibility: visible;
-    background-image: url("http://wesm1.sg-host.com/wp-content/uploads/2021/04/iconfinder_cancel_circle_1303876.png");
-    background-repeat: no-repeat;
-    background-size: cover;
-    width: 30px;
-    height: 30px;
-}
-/* Remove the dotted outline on mobile menu */
-#primary-mobile-menu,
-#primary-mobile-menu:focus,
-#primary-mobile-menu:active,
-#primary-mobile-menu:visited,
-#primary-mobile-menu:hover {
-    outline: 0 !important;
-}
-/* Style the navigation menu */
-/* Be better to apply .btn class to .menu-wrapper?	 */
-.menu-wrapper li {
-    display: inline-block;
-    font-weight: 400;
-    color: #212529;
-    text-align: center;
-    vertical-align: middle;
-    cursor: pointer;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-    background-color: transparent;
-    border: 1px solid transparent;
-    padding: .375rem .75rem;
-    font-size: 1rem;
-    line-height: 1.5;
-    border-radius: .25rem;
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
- }
- /* Hide menu except for .callout-menu-btn on screens without enough space */
-.collapse-menu-item {
-    display: none !important;
-}
-/* Center navigation */
-.primary-navigation {
-    margin: 0 auto;
-}
-/* Outlined menu item */
-/* .callout-menu-btn a {
-    outline: #fff solid 1px;
-    position: absolute;
-    top: -20px;
-    right: -100px;			
-} */
-.menu-wrapper a:hover {
-    color: #09d36c !important;
-}
-.callout-menu-btn a:hover {
-    color: black !important;
-    background: #fff;
-}
-/* -------------------------
 * Custom Header -----------
 * -------------------------
 */
 /* Set header image height to viewport */
 .header-overlay {
-    height: 100vh;
+	/* 	Parent element for pseudo::after */
+	height: 100vh;
+    position:relative;
+    z-index:0;	
 }
-.site-header {
-    margin-top: -3%;
-}
-.hero-header-position {
-    position: absolute;
-    top: 20%;
-    width: 100%;
-    overflow: hidden;/* Stop .diagonal-cut extending beyond the viewport width	 */
+.header-overlay::after {
+	/* Pseudo element positioned within parent and clipped	 */
+	content: " ";
+    position:absolute;
+	z-index:-1;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;	
+  	background-blend-mode: multiply;	
+	background-size: cover; 
+   	object-fit:cover; 
+	background-position: 50% 50%;
+    clip-path: polygon(0 0, 100% 0, 100% 93%, 0 83%);
 }
 .hero-header {
-    height: 115vh;
-    overflow: hidden;
-    position:relative; 
-    background: none;
-}
-/* Angular crop to header hero image */
-/* https://stackoverflow.com/questions/29259935/cutting-image-diagonally-with-css */
-/* .hero-header::after  */
-.diagonal-cut {
-    position: absolute;
-    top: 65%;
-    left: -10%;
-    height: 25%;
-    width: 140%;
-    background: #fff;
-    -webkit-transform: rotate(7deg);
-    -moz-transform: rotate(-7deg);
-    transform: rotate(7deg);
-	z-index: -999;
-}
-.hero-header p {
-    line-height: 1.3;
+	background: transparent;
 }
 /* -------------------------
 * Icon Cards --------------
 * -------------------------
 */
 /* Move icon card row closer to the header overlay image*/
-.icon-card-row {
-    position: absolute;
-    top: 85%;
-}
 .card {
     height: 100%;
 }
@@ -326,6 +176,114 @@ display: none;
     padding: .5rem 2rem .5rem 2rem;
 }
 /* -------------------------
+* Mobile menu --------------
+* -------------------------
+*/
+/* Add logo to mobile menu */
+span.dropdown-icon.close::before {
+	content: "";
+	visibility: visible;
+	background: url('http://wesm1.sg-host.com/wp-content/uploads/2021/04/envira-footer-logo.png');
+    background-size: cover;
+	height: 100px;
+    width: 200px;
+    position: absolute;
+    left: 0;
+}
+/* Custom mobile hamburger */
+.dropdown-icon.open {
+    color: transparent !important;
+    background-image: url("http://wesm1.sg-host.com/wp-content/uploads/2021/04/flipped.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border: none;
+    margin-right: 10px;
+}
+span.close {
+    visibility: hidden;
+}
+.close::after {
+    content: "";
+    display: block !important;
+    visibility: visible;
+    background-image: url("http://wesm1.sg-host.com/wp-content/uploads/2021/04/iconfinder_cancel_circle_1303876.png");
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 30px;
+    height: 30px;
+}
+/* Posiiton and prepare mobile navigation */
+#site-navigation {
+    height: 100vh;
+    position: absolute;
+    top: 0;
+}
+.primary-navigation-open .menu-button-container {
+    position: absolute;
+    background: transparent;
+}
+.primary-navigation-open .primary-navigation>.primary-menu-container {
+    background: transparent;
+}
+/* Remove the dotted outline on mobile menu */
+#primary-mobile-menu,
+#primary-mobile-menu:focus,
+#primary-mobile-menu:active,
+#primary-mobile-menu:visited,
+#primary-mobile-menu:hover {
+    outline: 0 !important;
+}
+/* Style contact button */
+.primary-navigation-open .primary-menu-container .callout-menu-btn a {
+    text-align: center;
+    outline: #fff solid 1px;
+    margin-bottom: 0;
+    width: 40%;
+    padding: .7rem 2rem!important;
+    font-weight: 300;
+    font-size: small;
+}
+/* Hide menu except for .callout-menu-btn on screens without enough space */
+.collapse-menu-item {
+    display: none !important;
+}
+/* Center navigation */
+.primary-navigation {
+    margin: 0 auto;
+}
+.primary-navigation-open .primary-menu-container a {
+    text-align: left;
+}
+/* Style the navigation menu */
+/* Be better to apply .btn class to .menu-wrapper?	 */
+.menu-wrapper li {
+    display: inline-block;
+    font-weight: 400;
+    color: #212529;
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    background-color: transparent;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+ }
+/* Correct conflict with parent theme */
+.primary-navigation a:focus,
+.primary-navigation .primary-menu-container>ul>.menu-item>a {
+	position: revert !important;
+}
+/* -------------------------
 * Media Queries -----------
 * -------------------------
 */
@@ -336,37 +294,47 @@ display: none;
 		display: none !important;
 		visibility: hidden !important;
 	}
-span.dropdown-icon.close::before {
-	visibility: hidden;
-}	
+	span.dropdown-icon.close::before {
+		visibility: hidden;
+	}	
 	#site-navigation {
 		/* remove mobile menu styling*/
 		position: relative;
  		background: transparent !important;
 	}
-.callout-menu-btn a {
-    outline: #fff solid 1px;
-    /* Position menu outside of natural DOM context */
-    position: absolute;
-    top: -20px;
-    right: -100px;			
-}	
+	.callout-menu-btn {
+		position: relative;
+		right: -60%;
+	}		
+	}
+	.callout-menu-btn a {
+		outline: #fff solid 1px;
+		/* Position menu outside of natural DOM context */
+		position: absolute;
+		top: -20px;
+		right: -100px;			
+	}		
+	.header-overlay {
+		/* 	make header image area bigger */
+		height: 120vh;
+		margin-bottom: 15%;/* Move icon-cards-row down */
+	}	
+	.header-overlay::after {
+		/* adjust clip	 */
+	   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 79%);
+	}	
+	/* .hero-header jumps out of place - possibly due to parent element psuedo class? */
+	.hero-header {
+		position: absolute;
+		top: 20%;
+		bottom: 0;
+		left: 0;
+		right: 0;
+	}	
 }
-@media (min-width: 500px) { 
-      /* Re-posiiton hero-header below collapsed menu */
-      .hero-header-position {
-          top: 30%;
-      } 
-      .diagonal-cut {
-          top: 55%;
-      }	
-}
+@media (min-width: 500px) { }
 /* Small devices (landscape phones, 576px and up) */
 @media (min-width: 576px) { 
-      /* Re-posiiton hero-header below collapsed menu */
-      .hero-header-position {
-          top: 25%;
-       } 	
       /* Remove mobile menu background styles */
       .primary-navigation-open .menu-button-container {
           background: none;
@@ -378,9 +346,6 @@ span.dropdown-icon.close::before {
       .primary-menu-container ul li:nth-child(4) {
           margin-top: 0;
           margin-left: 0;
-      }	
-      .diagonal-cut {
-          top: 60%;
       }	
       .icon-cards-row {
           margin-top: -17%;/* Position closer to header overlay */
@@ -396,12 +361,22 @@ span.dropdown-icon.close::before {
 	  }
 }
 /* // Medium devices (tablets, 768px and up) */
-@media (min-width: 768px) { 
- 
-      .diagonal-cut {
-         top: 69%;
+@media (min-width: 768px) { }/* Close media */
+@media (min-width: 789px) {
+	    /* Unhide menu items */
+       .collapse-menu-item {
+          display: inline !important;
+		  right: 0; 
        }
-}/* Close media */
+	.primary-navigation>div>.menu-wrapper li:last-child { 
+	/* 	speific selector for .callout-menu-btn */
+          position: revert;			
+       }	
+	.callout-menu-btn a {
+        /* Position menu inside of natural DOM context */
+          position: revert;			
+       }	
+}
 /* // Large devices (desktops, 992px and up iphone) */
 @media (min-width: 992px) { 
 		.site-title {
@@ -409,24 +384,20 @@ span.dropdown-icon.close::before {
 		}
 		.site-description {
 			font-size: 100%;
-		}      
+		}
+		.header-overlay {
+		margin-bottom: 7%;
+		}		
        /* Pseudo Bootstrap button in menu nav*/
-      .callout-menu-btn {
+      	.callout-menu-btn {
          left: +10%;
-      }
+      	}
+		.menu-wrapper li {
+    	padding: .375rem 1.75rem;
+		}	
       .footer-services {
 		display:inline-block;
-	}
-}
-@media (min-width: 789px) {
-	    /* Unhide menu items */
-       .collapse-menu-item {
-          display: inline !important;
-       }
-      .callout-menu-btn a {
-        /* Position menu inside of natural DOM context */
-          position: revert;			
-       }	
+		}
 }
 /* // X-Large devices (large desktops, 1200px and up) laptop*/
 @media (min-width: 1200px) {
@@ -435,8 +406,6 @@ span.dropdown-icon.close::before {
        .callout-menu-btn {
           left: +20%;
         }
- }
- /* // XX-Large devices (larger desktops, 1400px and up) */
- @media (min-width: 1400px) {
-  
- }
+}
+/* // XX-Large devices (larger desktops, 1400px and up) */
+@media (min-width: 1400px) { }
